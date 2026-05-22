@@ -13,9 +13,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/assets/triband_bev_sample.png" width="31%" alt="TriBand-BEV sample">
-  <img src="docs/assets/bev_detection_sample.png" width="31%" alt="BEV oriented detections">
-  <img src="docs/assets/iqr_comparison.png" width="31%" alt="3D recovery comparison">
+  <img src="docs/assets/hero_bev_rgb_grid.png" width="96%" alt="TriBand-BEV maps on the first row and matching RGB frames on the second row">
 </p>
 
 ## What this repository does
