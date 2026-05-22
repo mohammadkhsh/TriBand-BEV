@@ -51,6 +51,10 @@ flowchart LR
     I --> J[2D / BEV / 3D evaluation]
 ```
 
+<p align="center">
+  <img src="docs/assets/system_overview.png" width="96%" alt="TriBand-BEV full system overview diagram">
+</p>
+
 ## Core ideas
 
 - **TriBand-BEV encoding:** discretizes the forward LiDAR field of view into a 700 x 800 BEV map at 0.10 m/cell over `x=[0,70] m`, `y=[-40,40] m`.
