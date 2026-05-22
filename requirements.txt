@@ -1,0 +1,13 @@
+﻿numpy
+opencv-python
+imageio
+Pillow
+matplotlib
+pandas
+tabulate
+shapely
+ultralytics
+torch
+torchvision
+numba
+fire

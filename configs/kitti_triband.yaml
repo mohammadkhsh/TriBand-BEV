@@ -1,0 +1,6 @@
+﻿# KITTI TriBand-BEV dataset config
+path: ../ds-yolo-3obj-3h2-lowZwideJitterAug-amp
+train: images/train
+val: images/val
+nc: 3
+names: ["Car", "Pedestrian", "Cyclist"]
