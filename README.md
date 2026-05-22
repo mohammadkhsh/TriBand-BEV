@@ -29,8 +29,9 @@ flowchart LR
     B --> E[Train high-resolution OBB detector]
     D --> E
     E --> F[BEV oriented predictions]
-    F --> G[Multi-offset merge + polygon NMS]
-    G --> H[3D box recovery]
+    F --> H[3D box recovery]
+    F -. optional multi-offset NMS .-> G[Prediction merge]
+    G -.-> H
     A --> H
     C --> H
     H --> I[KITTI-format results]
@@ -42,7 +43,7 @@ flowchart LR
 - **TriBand-BEV encoding:** discretizes the forward LiDAR field of view into a 700 x 800 BEV map at 0.10 m/cell over `x=[0,70] m`, `y=[-40,40] m`.
 - **Height-aware channels:** each RGB channel stores the strongest reflectance response in a vertical band after LiDAR height normalization: low, middle, and high.
 - **High-resolution fusion:** the detector head uses P1-P4 feature maps so small BEV footprints, especially pedestrians, keep enough spatial detail.
-- **Multi-offset robustness:** optional validation/test encodings are generated with `z_offset` shifts of `-0.3 m`, `0 m`, and `+0.3 m`, then merged with 0.5 IoU polygon NMS.
+- **Optional multi-offset robustness:** validation/test encodings can be generated with `z_offset` shifts of `-0.3 m`, `0 m`, and `+0.3 m`, then merged with 0.5 IoU polygon NMS. This gives only minimal AP gains while roughly tripling BEV inference work, so the single-offset path is the recommended default.
 - **Geometry-only 3D recovery:** no learned depth head is needed; 3D boxes are reconstructed from the predicted BEV footprint and the original point cloud.
 
 ## Repository layout
@@ -111,7 +112,7 @@ train_idx.txt
 val_idx.txt
 ```
 
-and writes BEV images/labels under the configured experiment directory. In the current local version, validation frames also receive `*_pos30` and `*_neg30` variants for multi-offset inference.
+and writes BEV images/labels under the configured experiment directory. If enabled, validation frames can also receive `*_pos30` and `*_neg30` variants for multi-offset inference, but this is optional and not recommended for the default real-time setting.
 
 ### 2. Train the oriented BEV detector
 
@@ -164,9 +165,9 @@ Prediction text format:
 
 All coordinates are normalized to the BEV image frame.
 
-### 4. Merge multi-offset predictions with polygon NMS
+### 4. Optional: merge multi-offset predictions with polygon NMS
 
-For folders containing triplets such as `000008.txt`, `000008_pos30.txt`, and `000008_neg30.txt`, run:
+The recommended default is to skip this step and use the single-offset predictions directly. Multi-offset inference gives very small performance gains in the paper, but it requires about three BEV forward passes and therefore more processing power. If you still generate triplets such as `000008.txt`, `000008_pos30.txt`, and `000008_neg30.txt`, merge them with:
 
 ```bash
 python scripts/filter_multi_offset_predictions.py \
