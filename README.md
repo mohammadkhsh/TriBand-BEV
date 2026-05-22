@@ -12,6 +12,13 @@
   <img alt="Runtime" src="https://img.shields.io/badge/Runtime-49%20FPS-2E7D32">
 </p>
 
+
+<p align="center">
+  <a href="https://arxiv.org/abs/2605.12220"><img alt="Paper" src="https://img.shields.io/badge/Paper-arXiv%3A2605.12220-B31B1B?logo=arxiv&logoColor=white"></a>
+</p>
+
+> If you use this repository, code, figures, or method description, please cite our paper. Citation details are available at the end of this README.
+
 <p align="center">
   <img src="docs/assets/hero_bev_rgb_grid.png" width="96%" alt="TriBand-BEV maps on the first row and matching RGB frames on the second row">
 </p>
@@ -300,6 +307,7 @@ Values are mean AP over easy/moderate/hard in percent.
   title     = {TriBand-BEV: Real-Time LiDAR-Only 3D Pedestrian Detection via Height-Aware BEV and High-Resolution Feature Fusion},
   author    = {Khoshkdahan, Mohammad and Vinel, Alexey},
   booktitle = {Proceedings of the 25th International Conference on Autonomous Agents and Multiagent Systems (AAMAS)},
+  pages     = {1294--1303},
   year      = {2026}
 }
 ```
