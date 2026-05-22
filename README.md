@@ -23,6 +23,12 @@
   <img src="docs/assets/hero_bev_rgb_grid.png" width="96%" alt="TriBand-BEV maps on the first row and matching RGB frames on the second row">
 </p>
 
+## Motivation
+
+- Urban robots and autonomous vehicles need fast, reliable, LiDAR-only perception that works under real-time compute and power limits.
+- Camera-LiDAR fusion and full 3D LiDAR models can be heavy, memory intensive, and difficult to deploy on edge hardware.
+- TriBand-BEV compresses the full 3D LiDAR scene into a normal RGB-like BEV image, so efficient 2D oriented detectors can process it directly.
+
 ## What this repository does
 
 TriBand-BEV converts KITTI LiDAR point clouds into compact 2D bird's-eye-view tensors and trains a high-resolution oriented detector to find Cars, Pedestrians, and Cyclists. The detector predicts rotated 2D footprints on the BEV plane. A geometry post-processor then recovers KITTI-format 3D bounding boxes by expanding each footprint, selecting the corresponding LiDAR points, estimating the bottom and top plates, filtering noisy height candidates with IQR, and projecting the recovered box back to the camera frame.
